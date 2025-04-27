@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "Alert360",
   description: "Alert360",
 };
+export const icons = {
+  icon: "/favicon.svg",
+};
 
 export default function RootLayout({
   children,
@@ -25,6 +28,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <link rel="icon" href="/favicon.svg" sizes="any" />
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
