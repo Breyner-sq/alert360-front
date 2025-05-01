@@ -32,7 +32,7 @@ export default function RootLayout({
       <link rel="icon" href="/favicon.svg" sizes="any" />
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen overflow-x-hidden flex flex-col`}
       >
         <NavBar />
         {children}

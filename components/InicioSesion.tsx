@@ -1,24 +1,26 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const modes = [
-  { texto: "INICIA SESIÓN", modo: "login" },
+  { texto: "INICIA SESIÓN", modo: "signin" },
   { texto: "CREAR CUENTA", modo: "signup" },
 ]
 
 export default function InicioSesion() {
-  const [mode, setMode] = useState<string>("login");
+  const searchParams = useSearchParams();
+  const mode = searchParams.get('mode');
   return (
     <div className="bg-secondary w-full max-w-[32rem] rounded-3xl flex flex-col p-10 gap-4">
       <div className="flex justify-center">
         {modes.map((m) => (
-          <button
+          <Link
             key={m.modo}
             className="text-white font-bold text-lg relative cursor-pointer px-2"
-            onClick={() => setMode(m.modo)}
+            href={{ pathname: "/auth", query: { mode: m.modo } }}
+            replace
           >
             {m.texto}
             {mode === m.modo && (
@@ -32,11 +34,11 @@ export default function InicioSesion() {
                 className="absolute bottom-0 left-0 rounded-full h-1 w-full bg-terciary z-[10]"
               />
             )}
-          </button>
+          </Link>
         ))}
       </div>
       <div className="flex-1">
-        {mode === "login" && <Login />}
+        {mode === "signin" && <Login />}
         {mode === "signup" && <Signup />}
       </div>
     </div>

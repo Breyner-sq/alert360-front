@@ -271,7 +271,7 @@ const Ribbons: React.FC<RibbonsProps> = ({
     backgroundColor,
   ]);
 
-  return <div ref={containerRef} className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden" />;
+  return <div ref={containerRef} className="fixed inset-0 w-full h-full pointer-events-none overflow-hidden" />;
 };
 
 export default Ribbons;

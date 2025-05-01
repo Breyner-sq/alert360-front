@@ -17,6 +17,9 @@ input[type='password'] {
     scrollbar-color: var(--terciary) var(--secondary);
 }
 
+.scrollbar-transparent-secondary {
+    scrollbar-color: var(--secondary) white;
+}
 .scrollbar-track-secondary::-webkit-scrollbar-track {
     background: var(--secondary);
 }
