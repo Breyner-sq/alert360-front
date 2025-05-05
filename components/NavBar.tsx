@@ -23,7 +23,7 @@ export default function NavBar() {
             <Link href={"#"} onClick={() => {
                 setNotifications(!notifications)
             }}><Image className="size-8" src={notifications ? "/bell-unread.svg" : "/bell.svg"} width={64} height={64} alt={""} /></Link>
-            <Link href={"#"}><Image className="size-8" src={"/user.svg"} width={64} height={64} alt={""} /></Link>
+            <Link href={"/app/profile"}><Image className="size-8" src={"/user.svg"} width={64} height={64} alt={""} /></Link>
         </div>}
     </div>;
 }
