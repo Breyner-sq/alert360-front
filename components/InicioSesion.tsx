@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -9,7 +10,8 @@ const modes = [
   { texto: "CREAR CUENTA", modo: "signup" },
 ];
 
-export default function InicioSesion() {
+// Componente interno que usa searchParams
+function InicioSesionContent() {
   const searchParams = useSearchParams();
   const initialMode = searchParams.get('mode') || 'signin';
   const initialEmail = searchParams.get('email') || '';
@@ -39,6 +41,19 @@ export default function InicioSesion() {
         {mode === "signup" && <Signup initialEmail={initialEmail} />}
       </div>
     </div>
+  );
+}
+
+// Componente principal envuelto en Suspense
+export default function InicioSesion() {
+  return (
+    <Suspense fallback={
+      <div className="bg-secondary w-full max-w-[32rem] rounded-3xl flex flex-col p-10 gap-4 items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      </div>
+    }>
+      <InicioSesionContent />
+    </Suspense>
   );
 }
 
