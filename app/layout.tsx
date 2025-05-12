@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Alert360",
   description: "Alert360",
-};
-export const icons = {
-  icon: "/favicon.svg",
+  icons: {
+    icon: "/favicon.svg",
+  }
 };
 
 export default function RootLayout({
