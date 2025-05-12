@@ -1,5 +1,6 @@
 // URL base del backend
-export const API_BASE_URL = "http://192.168.198.94:8081";
+// Usa variable de entorno o valor por defecto
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081";
 
 // Helper para peticiones fetch
 export async function fetcher<T>(

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
+import "mapbox-gl/dist/mapbox-gl.css"; // Aseguramos importar los estilos
 
 interface MapProps {
   onSelect: (coords: { latitude: number; longitude: number }) => void;
@@ -11,7 +12,12 @@ interface MapProps {
   height?: string | number;
 }
 
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "";
+// Obtenemos el token del entorno
+const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+if (!mapboxToken) {
+  console.error("⚠️ No se encontró la variable NEXT_PUBLIC_MAPBOX_TOKEN en .env.local");
+}
+mapboxgl.accessToken = mapboxToken || "";
 
 export const Map: React.FC<MapProps> = ({
   onSelect,

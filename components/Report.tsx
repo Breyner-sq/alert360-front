@@ -1,8 +1,8 @@
 
 import { useState } from 'react';
 import { Map } from '@/components/maps/Map';
-import { Geocoder } from '@/components/maps/Geocoder';
 import axios from 'axios';
+import { Geocoder } from './maps/GeoCoder';
 
 interface ReportForm {
   title: string;
@@ -38,7 +38,9 @@ const ReportPage: React.FC = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setForm(f => ({ ...f, images: Array.from(e.target.files) }));
+      if (e.target.files) {
+        setForm(f => ({ ...f, images: e.target.files ? Array.from(e.target.files) : [] }));
+      }
     }
   };
 
@@ -57,14 +59,19 @@ const ReportPage: React.FC = () => {
       const fd = new FormData();
       const { title, description, categories, images, location } = form;
       fd.append('report', JSON.stringify({ title, description, categories, location }));
-      images.forEach((file, i) => fd.append('images', file));
+      images.forEach((file) => fd.append('images', file));
       const res = await axios.post('/reports', fd, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       setSuccess('Reporte creado exitosamente.');
       console.log('Created:', res.data);
-    } catch (err: any) {
-      setError(err?.response?.data?.message || 'Error al crear el reporte');
+    } catch (err: unknown) {
+      const error = err as Error;
+      if ('response' in error) {
+        setError(error?.message || 'Error al crear el reporte');
+      } else {
+        setError(error.message || 'Error al crear el reporte');
+      }
     }
   };
 
